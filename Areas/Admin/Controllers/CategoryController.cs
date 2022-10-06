@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Data_Access;
 
 namespace Academy.Areas.Admin.Controllers
 {
@@ -30,6 +31,30 @@ namespace Academy.Areas.Admin.Controllers
                 });
             return View(categoriesList);
       
+        }
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(CategoryModel categoryModel)
+        {
+            if (ModelState.IsValid)
+            {
+                int createdResult = categoryService.Create(new Data_Access.Category
+                {
+                    Name = categoryModel.Name
+                });
+                if (createdResult == -2)
+                {
+                    ViewBag.Message = "Category Name is exists !! ";
+                    return View(categoryModel);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
     }
 }

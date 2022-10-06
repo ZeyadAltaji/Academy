@@ -2017,6 +2017,7 @@
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_OfflineLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2063,9 +2064,9 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data Access\Data Access.csproj">
+    <ProjectReference Include="..\Data Access\Data_Access.csproj">
       <Project>{6AE90659-EF11-431C-BDCE-523B5E060C38}</Project>
-      <Name>Data Access</Name>
+      <Name>Data_Access</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

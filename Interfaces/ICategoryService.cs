@@ -10,5 +10,6 @@ namespace Academy.Interfaces
     public interface ICategoryService
     {
         List<Category> ReadAll();
+        int Create(Category newcategory);
     }
 }

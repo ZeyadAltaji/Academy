@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academy", "Academy.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academy.Tests", "..\Academy.Tests\Academy.Tests.csproj", "{BDFEA8E4-1AB4-4489-8946-7C6A9AEF8660}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data Access", "..\Data Access\Data Access.csproj", "{6AE90659-EF11-431C-BDCE-523B5E060C38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_Access", "..\Data Access\Data_Access.csproj", "{6AE90659-EF11-431C-BDCE-523B5E060C38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

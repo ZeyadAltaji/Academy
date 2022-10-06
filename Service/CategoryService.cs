@@ -14,6 +14,20 @@ namespace Academy.Service
         {
             academyEntities =new AcademyEntities(); 
         }
+
+        public int Create(Category newcategory)
+        {
+            var categoryName = newcategory.Name.ToLower();
+            var categoryNameResult = academyEntities.Categories.Where(x => x.Name.ToLower() == categoryName).Any();
+            if (categoryNameResult)
+            {
+                return -2;
+            }
+
+            academyEntities.Categories.Add(newcategory);
+            return academyEntities.SaveChanges();
+        }
+
         public List<Category> ReadAll()
         {
             return academyEntities.Categories.ToList();
