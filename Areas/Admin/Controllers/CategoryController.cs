@@ -56,5 +56,52 @@ namespace Academy.Areas.Admin.Controllers
 
             return View();
         }
+
+        public ActionResult Updated(int ? id)
+        {
+            if(id == null || id == 0)
+            {
+                return RedirectToAction("Index" , "Dashboard");
+            }
+            var ExitCatogory = categoryService.ReadById(id.Value);
+            if(ExitCatogory == null)
+            {
+                return HttpNotFound($"This Category ({id}) not Fonud");
+            }
+            var categoryModel = new CategoryModel
+            {
+                ID =ExitCatogory.ID,
+                Name=ExitCatogory.Name,
+                ParentId=ExitCatogory.Parent_ID
+            };
+            return View(categoryModel);
+        }
+        [HttpPost]
+        public ActionResult Updated(CategoryModel categoryModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var UpdateCategory = new Category
+                {
+                    ID = categoryModel.ID,
+                    Name = categoryModel.Name,
+                    Parent_ID = categoryModel.ParentId
+                };
+              var res = categoryService.Update(UpdateCategory);
+                if (res == -2)
+                {
+                    ViewBag.Message = "Category Name is exists !! ";
+                    return View(categoryModel);
+                }
+                else if (res > 0)
+                {
+                    ViewBag.Success = true;
+                    ViewBag.Message = $"Category ({categoryModel.ID}) Updated SuccessFully . ";
+                }
+                else
+                    ViewBag.Message = $"An Error Occurred !!";
+            }
+            return View(categoryModel);
+        }
     }
 }

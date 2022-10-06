@@ -9,6 +9,8 @@ namespace Academy.Interfaces
 {
     public interface ICategoryService
     {
+        int Update(Category UpdateCategory);
+        Category ReadById (int id);
         List<Category> ReadAll();
         int Create(Category newcategory);
     }
