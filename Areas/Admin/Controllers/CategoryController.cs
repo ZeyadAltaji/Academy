@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Academy.Models;
+using Academy.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +10,26 @@ namespace Academy.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
+        private readonly CategoryService categoryService;
+        public CategoryController()
+        {
+            categoryService = new CategoryService();
+        }
         // GET: Admin/Category
         public ActionResult Index()
         {
-            return View();
+            var categories = categoryService.ReadAll();
+            var categoriesList = new List<CategoryModel>();
+            foreach (var item in categories)
+                categoriesList.Add(new CategoryModel
+                {
+                    ID = item.ID,
+                    Name = item.Name,
+                    ParentId = item.Parent_ID,
+                    ParentName = item.Category2?.Name
+                });
+            return View(categoriesList);
+      
         }
     }
 }
