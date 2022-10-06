@@ -119,6 +119,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Instructor\InstructorAreaRegistration.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -128,6 +130,7 @@
   <ItemGroup>
     <Content Include="assets\css\sb-admin-2.css" />
     <Content Include="assets\css\sb-admin-2.min.css" />
+    <Content Include="assets\css\styles.css" />
     <Content Include="assets\img\undraw_posting_photo.svg" />
     <Content Include="assets\img\undraw_profile.svg" />
     <Content Include="assets\img\undraw_profile_1.svg" />
@@ -140,6 +143,7 @@
     <Content Include="assets\js\demo\datatables-demo.js" />
     <Content Include="assets\js\sb-admin-2.js" />
     <Content Include="assets\js\sb-admin-2.min.js" />
+    <Content Include="assets\js\scripts.js" />
     <Content Include="assets\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="assets\vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="assets\vendor\bootstrap\js\bootstrap.js" />
@@ -1992,6 +1996,10 @@
     <Content Include="assets\vendor\jquery\jquery.min.map" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.map" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Instructor\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2019,9 +2027,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Instructor\Controllers\" />
+    <Folder Include="Areas\Instructor\Data\" />
+    <Folder Include="Areas\Instructor\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
