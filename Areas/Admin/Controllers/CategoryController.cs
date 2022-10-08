@@ -11,6 +11,7 @@ namespace Academy.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
+        CategoryModel categoryModel;
         private readonly CategoryService categoryService;
         public CategoryController()
         {
@@ -26,35 +27,37 @@ namespace Academy.Areas.Admin.Controllers
                 {
                     ID = item.ID,
                     Name = item.Name,
-                    ParentId = item.Parent_ID,
-                    ParentName = item.Category2?.Name
+                    ParentName =item.Category2?.Name
+                   
                 });
             return View(categoriesList);
       
         }
         public ActionResult Create()
         {
-            return View();
+            var CateModel = new CategoryModel();
+            InitMainCategory(null,ref CateModel);
+            return View(CateModel);
         }
         [HttpPost]
         public ActionResult Create(CategoryModel categoryModel)
         {
-            if (ModelState.IsValid)
-            {
+          
                 int createdResult = categoryService.Create(new Data_Access.Category
                 {
-                    Name = categoryModel.Name
+                    Name = categoryModel.Name,
+                    Parent_ID=categoryModel.ParentID
                 });
                 if (createdResult == -2)
                 {
-                    ViewBag.Message = "Category Name is exists !! ";
+                InitMainCategory(null,ref categoryModel);
+
+                ViewBag.Message = "Category Name is exists !! ";
                     return View(categoryModel);
                 }
 
                 return RedirectToAction("Index");
-            }
-
-            return View();
+       
         }
 
         public ActionResult Updated(int ? id)
@@ -72,25 +75,29 @@ namespace Academy.Areas.Admin.Controllers
             {
                 ID =ExitCatogory.ID,
                 Name=ExitCatogory.Name,
-                ParentId=ExitCatogory.Parent_ID
+                ParentID = ExitCatogory.Parent_ID
             };
+            InitMainCategory(ExitCatogory.ID, ref categoryModel);
+
             return View(categoryModel);
         }
         [HttpPost]
         public ActionResult Updated(CategoryModel categoryModel)
         {
-            if (ModelState.IsValid)
-            {
+          
                 var UpdateCategory = new Category
                 {
                     ID = categoryModel.ID,
                     Name = categoryModel.Name,
-                    Parent_ID = categoryModel.ParentId
+                    Parent_ID = categoryModel.ParentID
+
                 };
               var res = categoryService.Update(UpdateCategory);
                 if (res == -2)
                 {
-                    ViewBag.Message = "Category Name is exists !! ";
+                InitMainCategory(categoryModel.ID, ref categoryModel);
+
+                ViewBag.Message = "Category Name is exists !! ";
                     return View(categoryModel);
                 }
                 else if (res > 0)
@@ -100,8 +107,21 @@ namespace Academy.Areas.Admin.Controllers
                 }
                 else
                     ViewBag.Message = $"An Error Occurred !!";
-            }
+
+            InitMainCategory(categoryModel.ID, ref categoryModel);
+
             return View(categoryModel);
+        }
+        private void InitMainCategory(int? CategoryToexclude, ref CategoryModel categoryModel)
+        {
+            var CategoryList = categoryService.ReadAll();
+             categoryModel.MainCatogery = new SelectList(CategoryList, "ID", "Name");
+            if (CategoryToexclude != null)
+            {
+                var currentCate = CategoryList.Where(X=>X.ID == CategoryToexclude).FirstOrDefault();
+                CategoryList.Remove(currentCate);
+            }
+           
         }
     }
 }

@@ -41,11 +41,12 @@ namespace Academy.Service
         public int Update(Category UpdateCategory)
         {
             var categoryName = UpdateCategory.Name.ToLower();
-            var categoryNameResult = academyEntities.Categories.Where(x => x.Name.ToLower() == categoryName).Any();
-            if (categoryNameResult)
+            var categoryNameResult = academyEntities.Categories.Where(x => x.Name.ToLower() != categoryName);
+            if(categoryNameResult.Where(C =>C.Name.ToLower() == categoryName).Any())
             {
                 return -2;
             }
+            
             academyEntities.Categories.Attach(UpdateCategory);
             academyEntities.Entry(UpdateCategory).State = System.Data.Entity.EntityState.Modified;
             return academyEntities.SaveChanges();
