@@ -13,5 +13,6 @@ namespace Academy.Interfaces
         Category ReadById (int id);
         List<Category> ReadAll();
         int Create(Category newcategory);
+        bool Delete(int id); 
     }
 }

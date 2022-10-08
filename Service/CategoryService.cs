@@ -14,7 +14,6 @@ namespace Academy.Service
         {
             academyEntities =new AcademyEntities(); 
         }
-
         public int Create(Category newcategory)
         {
             var categoryName = newcategory.Name.ToLower();
@@ -27,7 +26,6 @@ namespace Academy.Service
             academyEntities.Categories.Add(newcategory);
             return academyEntities.SaveChanges();
         }
-
         public List<Category> ReadAll()
         {
             return academyEntities.Categories.ToList();
@@ -51,5 +49,16 @@ namespace Academy.Service
             academyEntities.Entry(UpdateCategory).State = System.Data.Entity.EntityState.Modified;
             return academyEntities.SaveChanges();
         }
+        public bool Delete(int id)
+        {
+            var category = ReadById(id);
+            if(category != null)
+            {
+                academyEntities.Categories.Remove(category);
+                return academyEntities.SaveChanges() > 0 ? true : false;
+            }
+            return false;
+        }
+
     }
 }

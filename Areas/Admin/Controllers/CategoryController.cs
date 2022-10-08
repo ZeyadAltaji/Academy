@@ -42,7 +42,6 @@ namespace Academy.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(CategoryModel categoryModel)
         {
-          
                 int createdResult = categoryService.Create(new Data_Access.Category
                 {
                     Name = categoryModel.Name,
@@ -57,7 +56,6 @@ namespace Academy.Areas.Admin.Controllers
                 }
 
                 return RedirectToAction("Index");
-       
         }
 
         public ActionResult Updated(int ? id)
@@ -111,6 +109,37 @@ namespace Academy.Areas.Admin.Controllers
             InitMainCategory(categoryModel.ID, ref categoryModel);
 
             return View(categoryModel);
+        }
+        public ActionResult Delete(int ? id)
+        {
+            if(id != null)
+            {
+                var category = categoryService.ReadById(id.Value);
+                var categoryInfo = new CategoryModel
+                {
+                    ID = category.ID,
+                    Name = category.Name,
+                    ParentName = category.Category2?.Name
+
+                };
+                return View(categoryInfo);
+            }
+
+            return RedirectToAction("Index");
+
+        }
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            if(id != null)
+            {
+                var deleted = categoryService.Delete(id.Value);
+                if (deleted)
+                    return RedirectToAction("Index");
+
+                return RedirectToAction("Delete", new { ID = id });
+            }
+         
+            return HttpNotFound();  
         }
         private void InitMainCategory(int? CategoryToexclude, ref CategoryModel categoryModel)
         {
