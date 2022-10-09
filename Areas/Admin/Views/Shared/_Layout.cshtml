@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Academy - @ViewBag.Title</title>
 
     <!-- Custom fonts for this template-->
     <link href="~/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -90,6 +90,14 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Trainer")"
+                   aria-expanded="true">
+                    @*<i class="fa-light fa-user-headset"></i>*@
+                    <i class="fas fa-light fa-user-headset"></i>
+                    <span>Trainer</span>
+                </a>
+            </li>
             <!-- Nav Item - Categories -->
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index","Category")"
@@ -97,7 +105,7 @@
                     <i class="fas fa-list"></i>
                     <span>Category</span>
                 </a>
-            </li> 
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 

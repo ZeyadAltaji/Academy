@@ -16,6 +16,7 @@ namespace Academy
         {
             AreaRegistration.RegisterAllAreas();
              RouteConfig.RegisterRoutes(RouteTable.Routes);
+            AutoMapperConfig.init();
          }
     }
 }

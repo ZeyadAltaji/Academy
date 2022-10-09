@@ -6,30 +6,34 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Data_Access;
+using AutoMapper;
 
 namespace Academy.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
-        CategoryModel categoryModel;
+       
         private readonly CategoryService categoryService;
+        private readonly IMapper Mapper;
         public CategoryController()
         {
             categoryService = new CategoryService();
+            Mapper = AutoMapperConfig.Mapper;
         }
         // GET: Admin/Category
         public ActionResult Index()
         {
             var categories = categoryService.ReadAll();
-            var categoriesList = new List<CategoryModel>();
-            foreach (var item in categories)
-                categoriesList.Add(new CategoryModel
-                {
-                    ID = item.ID,
-                    Name = item.Name,
-                    ParentName =item.Category2?.Name
-                   
-                });
+            var categoriesList = Mapper.Map<List<CategoryModel>>(categories);
+            //var categoriesList = new List<CategoryModel>();
+            //foreach (var item in categories)
+            //    categoriesList.Add(new CategoryModel
+            //    {
+            //        ID = item.ID,
+            //        Name = item.Name,
+            //        ParentName =item.Category2?.Name
+
+            //    });
             return View(categoriesList);
       
         }
@@ -42,11 +46,14 @@ namespace Academy.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(CategoryModel categoryModel)
         {
-                int createdResult = categoryService.Create(new Data_Access.Category
-                {
-                    Name = categoryModel.Name,
-                    Parent_ID=categoryModel.ParentID
-                });
+            var newcate = Mapper.Map<Category>(categoryModel);
+            newcate.Category2 = null;
+            int createdResult = categoryService.Create(newcate);
+                //int createdResult = categoryService.Create(new Data_Access.Category
+                //{
+                //    Name = categoryModel.Name,
+                //    Parent_ID=categoryModel.ParentID
+                //});
                 if (createdResult == -2)
                 {
                 InitMainCategory(null,ref categoryModel);
