@@ -2037,6 +2037,9 @@
     <Content Include="Areas\Admin\Views\Course\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Course\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Course\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Course\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Trainer\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Trainer\Delete.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

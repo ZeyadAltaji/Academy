@@ -13,5 +13,6 @@ namespace Academy.Interfaces
         List<Course> ReadAll();
         int Update(Course Updatedcourse);
         Course ReadById(int id);
+        bool Delete(int id);
     }
 }

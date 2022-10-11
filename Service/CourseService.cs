@@ -22,6 +22,17 @@ namespace Academy.Service
             return db.SaveChanges();
         }
 
+        public bool Delete(int id)
+        {
+            var course = ReadById(id);
+            if (course != null)
+            {
+                db.Courses.Remove(course);
+                return db.SaveChanges() > 0 ? true : false;
+            }
+            return false;
+        }
+
         public List<Course> ReadAll()
         {
             return db.Courses.ToList();

@@ -126,25 +126,40 @@ namespace Academy.Areas.Admin.Controllers
         }
 
         // GET: Admin/Course/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id != null)
+            {
+
+                var DeleteCourses = courseService.ReadById(id.Value);
+                var courseModel = Mapper.Map<CourseModel>(DeleteCourses);
+                InitSelectList(ref courseModel);
+
+                return View(courseModel);
+            }
+
+            return RedirectToAction("Index");
+
         }
 
         // POST: Admin/Course/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+ 
+        public ActionResult DeleteConfirmed(int ? id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                if (id != null)
+                {
+                    var deleted = courseService.Delete(id.Value);
+                    if (deleted)
+                        return RedirectToAction("Index");
+
+                    return RedirectToAction("Delete", new { ID = id });
+                }
+
+            return HttpNotFound();
+
+
         }
         private void InitSelectList(  ref CourseModel coursemodel)
         {

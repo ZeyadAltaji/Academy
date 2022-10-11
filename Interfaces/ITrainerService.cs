@@ -9,8 +9,8 @@ namespace Academy.Interfaces
 {
     public interface ITrainerService
     {
-      
-        Category ReadById(int id);
+
+        Trainer ReadById(int id);
         Trainer FindByEmail(string email);
         List<Trainer> ReadAll();
         int Create(Trainer newTrainer);

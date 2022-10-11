@@ -27,7 +27,13 @@ namespace Academy.Service
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            var Trainer = ReadById(id);
+            if (Trainer != null)
+            {
+                academyEntities.Trainers.Remove(Trainer);
+                return academyEntities.SaveChanges() > 0 ? true : false;
+            }
+            return false;
         }
 
         public Trainer FindByEmail(string email)
@@ -40,14 +46,16 @@ namespace Academy.Service
             return academyEntities.Trainers.ToList();   
         }
 
-        public Category ReadById(int id)
+        public Trainer ReadById(int id)
         {
-            throw new NotImplementedException();
+            return academyEntities.Trainers.Find(id);
         }
 
         public int Update(Trainer UpdateTrainer)
         {
-            throw new NotImplementedException();
+            academyEntities.Trainers.Attach(UpdateTrainer);
+            academyEntities.Entry(UpdateTrainer).State = System.Data.Entity.EntityState.Modified;
+            return academyEntities.SaveChanges();
         }
     }
 }

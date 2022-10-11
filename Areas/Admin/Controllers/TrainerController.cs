@@ -1,4 +1,5 @@
-﻿using Academy.Models;
+﻿using Academy.Interfaces;
+using Academy.Models;
 using Academy.Service;
 using AutoMapper;
 using Data_Access;
@@ -65,45 +66,77 @@ namespace Academy.Areas.Admin.Controllers
         }
 
         // GET: Admin/Trainer/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int ? id)
         {
-            return View();
+            if (id == null || id == 0) return RedirectToAction("Index", "Dashboard");
+            var ExitTrainer = trainerService.ReadById(id.Value);
+            if (ExitTrainer == null) return HttpNotFound($"This Trainer ({id}) Not Fonud");
+            var trainerModel = Mapper.Map<TrainerModel>(ExitTrainer);
+            
+            return View(trainerModel);
         }
 
         // POST: Admin/Trainer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(TrainerModel trainerModel)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    var trainerDTO = Mapper.Map<Trainer>(trainerModel);
+                    var res = trainerService.Update(trainerDTO);
+                    if (res >= 1)
+                    {
+                        return RedirectToAction("Index");
+                    }
 
-                return RedirectToAction("Index");
+                    ViewBag.Message = $"An Error Occurred !!";
+                }
+                return View(trainerModel);
+
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                ViewBag.Message = ex.Message;
+                return View(trainerModel);
             }
         }
 
         // GET: Admin/Trainer/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int ? id)
         {
-            return View();
+            if (id != null)
+            {
+
+                var Deletetrainer = trainerService.ReadById(id.Value);
+                var trainerModel = Mapper.Map<TrainerModel>(Deletetrainer);
+                return View(trainerModel);
+            }
+
+            return RedirectToAction("Index");
         }
 
         // POST: Admin/Trainer/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult DeleteConfirmed(int ? id)
         {
             try
             {
-                // TODO: Add delete logic here
+                if (id != null)
+                {
+                    var deleted = trainerService.Delete(id.Value);
+                    if (deleted)
+                        return RedirectToAction("Index");
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Delete", new { ID = id });
+                }
+
+                return HttpNotFound();
             }
-            catch
+            catch(Exception ex)
             {
+                ViewBag.Message = ex.Message;
                 return View();
             }
         }
