@@ -26,5 +26,19 @@ namespace Academy.Service
         {
             return db.Courses.ToList();
         }
+
+        public Course ReadById(int id)
+        {
+            return db.Courses.Find(id);
+        }
+
+        public int Update(Course Updatedcourse)
+        {
+
+
+            db.Courses.Attach(Updatedcourse);
+            db.Entry(Updatedcourse).State = System.Data.Entity.EntityState.Modified;
+            return db.SaveChanges();
+        }
     }
 }

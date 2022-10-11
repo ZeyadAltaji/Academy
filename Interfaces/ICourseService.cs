@@ -11,6 +11,7 @@ namespace Academy.Interfaces
     {
         int Create(Course course);
         List<Course> ReadAll();
-
+        int Update(Course Updatedcourse);
+        Course ReadById(int id);
     }
 }

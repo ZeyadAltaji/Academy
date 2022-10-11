@@ -83,24 +83,45 @@ namespace Academy.Areas.Admin.Controllers
         }
 
         // GET: Admin/Course/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int ? id)
         {
-            return View();
+            if (id == null || id == 0) return RedirectToAction("Index", "Dashboard");
+            var ExitCourses = courseService.ReadById(id.Value);
+            if (ExitCourses == null) return HttpNotFound($"This Courses ({id}) Not Fonud");
+            var courseModel = Mapper.Map<CourseModel>(ExitCourses);
+            InitSelectList(ref courseModel);
+            return View(courseModel);
         }
 
         // POST: Admin/Course/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(CourseModel courseData)
         {
+            InitSelectList(ref courseData);
+
             try
             {
-                // TODO: Add update logic here
+               if(ModelState.IsValid)
+               {
+                    var courseDTO = Mapper.Map<Course>(courseData);
+                    courseDTO.Category = null;
+                    courseDTO.Trainer = null;
+                    var res = courseService.Update(courseDTO);
+                    if (res >= 1)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                   
+                        ViewBag.Message = $"An Error Occurred !!";
+                }
 
-                return RedirectToAction("Index");
+
+                return View(courseData);
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                ViewBag.Message = ex.Message;
+                return View(courseData);
             }
         }
 
@@ -125,7 +146,7 @@ namespace Academy.Areas.Admin.Controllers
                 return View();
             }
         }
-        private void InitSelectList(ref CourseModel coursemodel)
+        private void InitSelectList(  ref CourseModel coursemodel)
         {
 
             var category = categoryService.ReadAll();
@@ -134,6 +155,8 @@ namespace Academy.Areas.Admin.Controllers
             var trainer = trainerService.ReadAll();
             var MappenTrainerList = Mapper.Map<IEnumerable<TrainerModel>>(trainer);
             coursemodel.Trainers = new SelectList(MappenTrainerList, "ID", "Name");
+
+            
         }
     }
 }
