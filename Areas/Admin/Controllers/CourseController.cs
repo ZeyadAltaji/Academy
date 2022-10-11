@@ -27,7 +27,9 @@ namespace Academy.Areas.Admin.Controllers
         // GET: Admin/Course
         public ActionResult Index()
         {
-            return View();
+            var courses = courseService.ReadAll();
+            var coursesList = Mapper.Map<List<CourseModel>>(courses);
+            return View(coursesList);
         }
 
         // GET: Admin/Course/Details/5

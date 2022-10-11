@@ -21,5 +21,10 @@ namespace Academy.Service
             db.Courses.Add(course);
             return db.SaveChanges();
         }
+
+        public List<Course> ReadAll()
+        {
+            return db.Courses.ToList();
+        }
     }
 }

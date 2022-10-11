@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Academy.Models.courseModel>
+﻿@model IEnumerable<Academy.Models.CourseModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Courses";
 }
 
 <h2>Index</h2>
@@ -18,20 +18,13 @@
             @Html.DisplayNameFor(model => model.Creation_date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category_ID)
+            @Html.DisplayNameFor(model => model.TrainerName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Trainer_ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.CategoryName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TrainerName)
-        </th>
+
         <th></th>
     </tr>
 
@@ -44,24 +37,15 @@
             @Html.DisplayFor(modelItem => item.Creation_date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Category_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Trainer_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
+            @Html.DisplayFor(modelItem => item.TrainerName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CategoryName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TrainerName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
         </td>
     </tr>
 }

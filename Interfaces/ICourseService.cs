@@ -10,5 +10,7 @@ namespace Academy.Interfaces
     public interface ICourseService
     {
         int Create(Course course);
+        List<Course> ReadAll();
+
     }
 }
