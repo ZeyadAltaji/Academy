@@ -145,7 +145,7 @@
     <Compile Include="Interfaces\ICourseService.cs" />
     <Compile Include="Interfaces\ITrainerService.cs" />
     <Compile Include="Models\CategoryModel.cs" />
-    <Compile Include="Models\courseModel.cs" />
+    <Compile Include="Models\CourseModel.cs" />
     <Compile Include="Models\TrainerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AdminService.cs" />

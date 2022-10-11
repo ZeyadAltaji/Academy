@@ -9,16 +9,17 @@ namespace Academy.Service
 {
     public class CourseService : ICourseService
     {
-        private readonly AcademyEntities academyEntities;
+        private readonly AcademyEntities db;
         public CourseService()
         {
-            academyEntities = new AcademyEntities();
+            db = new AcademyEntities();
         }
         public int Create(Course course)
         {
-            course.Creation_date= DateTime.Now;
-            academyEntities.Courses.Add(course);
-            return academyEntities.SaveChanges();
-         }
+            course.Creation_date = DateTime.Now;
+
+            db.Courses.Add(course);
+            return db.SaveChanges();
+        }
     }
 }
