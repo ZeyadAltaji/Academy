@@ -2071,6 +2071,7 @@
     <Folder Include="Areas\Instructor\Controllers\" />
     <Folder Include="Areas\Instructor\Data\" />
     <Folder Include="Areas\Instructor\Views\Shared\" />
+    <Folder Include="Uploads\Courses\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

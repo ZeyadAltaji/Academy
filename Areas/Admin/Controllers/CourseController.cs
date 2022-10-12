@@ -5,6 +5,7 @@ using Data_Access;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -53,12 +54,23 @@ namespace Academy.Areas.Admin.Controllers
         public ActionResult Create(CourseModel courseData)
         {
             InitSelectList(ref courseData);
-
+            if(courseData.ImageFile==null || courseData.ImageFile.ContentLength == 0)
+            {
+                return View (courseData);
+            }
             try
             {
                 if (ModelState.IsValid)
                 {
-                  
+                    
+                    var fileException = Path.GetExtension(courseData.ImageFile.FileName);
+                    var imageGuid = Guid.NewGuid().ToString();
+
+                    courseData.ImageID = imageGuid + fileException;
+
+                    //save file 
+                    string filepath = Server.MapPath($"~/Uploads/Courses/{courseData.ImageID}");
+                    courseData.ImageFile.SaveAs(filepath);
 
                     var courseDTO = Mapper.Map<Course>(courseData);
                     courseDTO.Category = null;
