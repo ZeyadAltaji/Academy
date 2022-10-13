@@ -54,23 +54,13 @@ namespace Academy.Areas.Admin.Controllers
         public ActionResult Create(CourseModel courseData)
         {
             InitSelectList(ref courseData);
-            if(courseData.ImageFile==null || courseData.ImageFile.ContentLength == 0)
-            {
-                return View (courseData);
-            }
             try
             {
                 if (ModelState.IsValid)
                 {
+                    courseData.ImageID = SaveImageFile(courseData.ImageFile);
                     
-                    var fileException = Path.GetExtension(courseData.ImageFile.FileName);
-                    var imageGuid = Guid.NewGuid().ToString();
-
-                    courseData.ImageID = imageGuid + fileException;
-
-                    //save file 
-                    string filepath = Server.MapPath($"~/Uploads/Courses/{courseData.ImageID}");
-                    courseData.ImageFile.SaveAs(filepath);
+                   
 
                     var courseDTO = Mapper.Map<Course>(courseData);
                     courseDTO.Category = null;
@@ -115,6 +105,9 @@ namespace Academy.Areas.Admin.Controllers
             {
                if(ModelState.IsValid)
                {
+                    courseData.ImageID = SaveImageFile(courseData.ImageFile,courseData.ImageID);
+
+
                     var courseDTO = Mapper.Map<Course>(courseData);
                     courseDTO.Category = null;
                     courseDTO.Trainer = null;
@@ -184,6 +177,28 @@ namespace Academy.Areas.Admin.Controllers
             coursemodel.Trainers = new SelectList(MappenTrainerList, "ID", "Name");
 
             
+        }
+        private string SaveImageFile(HttpPostedFileBase imagefile ,string currentImageId ="")
+        {
+            
+            if (imagefile != null)
+            {
+                var fileException = Path.GetExtension(imagefile.FileName);
+                var imageGuid = Guid.NewGuid().ToString();
+
+                string imageID= imageGuid + fileException;
+
+                //save file 
+                string filepath = Server.MapPath($"~/Uploads/Courses/{imageID}");
+                imagefile.SaveAs(filepath);
+                return imageID;
+            }
+            if (!string.IsNullOrEmpty(currentImageId))
+            {
+                string oldfilepath = Server.MapPath($"~/Uploads/Courses/{currentImageId}");
+                System.IO.File.Delete(oldfilepath);
+            }
+            return currentImageId;
         }
     }
 }

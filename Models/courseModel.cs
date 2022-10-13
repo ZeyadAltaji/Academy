@@ -31,7 +31,7 @@ namespace Academy.Models
         public SelectList Trainers { get; set; }
         public SelectList Categories { get; set; }
         public string ImageID { get; set; }
-        [Required]
+        
         public HttpPostedFileBase ImageFile{ get; set; }
     }
 }
