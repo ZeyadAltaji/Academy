@@ -34,4 +34,17 @@ namespace Academy.Models
         
         public HttpPostedFileBase ImageFile{ get; set; }
     }
+    public class CourseListModel
+    {
+        public IEnumerable<CourseModel> Courses { get; set; }
+        public string Query { get; set; }
+
+        [Display (Name="Trainer")]
+         public int trainerID { get; set; }
+        [Display(Name = "Category")]
+        public int CategoryID { get; set; }
+
+        public SelectList Trainers { get; set; }
+        public SelectList Categories { get; set; }
+    }
 }

@@ -26,11 +26,15 @@ namespace Academy.Areas.Admin.Controllers
             trainerService = new TrainerService();
         }
         // GET: Admin/Course
-        public ActionResult Index(int ? trainnerID =null)
+        public ActionResult Index(string query =null ,int ? categoryId = null,int ? trainnerID = null)
         {
-            var courses = courseService.ReadAll(trainnerID);
+            var coursesListData = new CourseListModel();
+            InitSelectList(ref coursesListData);    
+
+            var courses = courseService.ReadAll(query,trainnerID, categoryId);
             var coursesList = Mapper.Map<List<CourseModel>>(courses);
-            return View(coursesList);
+            coursesListData.Courses = coursesList;
+            return View(coursesListData);
         }
 
         // GET: Admin/Course/Details/5
@@ -169,15 +173,35 @@ namespace Academy.Areas.Admin.Controllers
         private void InitSelectList(  ref CourseModel coursemodel)
         {
 
-            var category = categoryService.ReadAll();
-            var MappenCategoiesList = Mapper.Map<IEnumerable<CategoryModel>>(category);
+            var MappenCategoiesList = GetCategories();
             coursemodel.Categories = new SelectList(MappenCategoiesList, "ID", "Name");
-            var trainer = trainerService.ReadAll();
-            var MappenTrainerList = Mapper.Map<IEnumerable<TrainerModel>>(trainer);
+
+            var MappenTrainerList = GetTrainers();
             coursemodel.Trainers = new SelectList(MappenTrainerList, "ID", "Name");
 
-            
         }
+        //filter
+        private void InitSelectList(ref CourseListModel courseLsit)
+        {
+            var MappenCategoiesList = GetCategories();
+            courseLsit.Categories = new SelectList(MappenCategoiesList, "ID", "Name");
+
+            var MappenTrainerList =GetTrainers();
+            courseLsit.Trainers = new SelectList(MappenTrainerList, "ID", "Name");
+
+
+        }
+        private IEnumerable<CategoryModel> GetCategories()
+        {
+            var category = categoryService.ReadAll();
+           return Mapper.Map<IEnumerable<CategoryModel>>(category);
+        }
+        private IEnumerable<TrainerModel> GetTrainers()
+        {
+            var trainer = trainerService.ReadAll();
+            return Mapper.Map<IEnumerable<TrainerModel>>(trainer);
+        }
+
         private string SaveImageFile(HttpPostedFileBase imagefile ,string currentImageId ="")
         {
             
