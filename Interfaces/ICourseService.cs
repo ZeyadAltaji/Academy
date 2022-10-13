@@ -10,9 +10,10 @@ namespace Academy.Interfaces
     public interface ICourseService
     {
         int Create(Course course);
-        List<Course> ReadAll();
+        List<Course> ReadAll(int ? trainnerID = null);
         int Update(Course Updatedcourse);
         Course ReadById(int id);
+        
         bool Delete(int id);
     }
 }

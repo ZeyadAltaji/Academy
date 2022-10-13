@@ -33,9 +33,10 @@ namespace Academy.Service
             return false;
         }
 
-        public List<Course> ReadAll()
+        public List<Course> ReadAll(int? trainnerID = null)
         {
-            return db.Courses.ToList();
+            return db.Courses.Where(X=>trainnerID==null||
+                                    X.Trainer_ID == trainnerID).ToList();
         }
 
         public Course ReadById(int id)

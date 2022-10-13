@@ -26,9 +26,9 @@ namespace Academy.Areas.Admin.Controllers
             trainerService = new TrainerService();
         }
         // GET: Admin/Course
-        public ActionResult Index()
+        public ActionResult Index(int ? trainnerID =null)
         {
-            var courses = courseService.ReadAll();
+            var courses = courseService.ReadAll(trainnerID);
             var coursesList = Mapper.Map<List<CourseModel>>(courses);
             return View(coursesList);
         }
