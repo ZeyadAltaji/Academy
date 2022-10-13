@@ -26,7 +26,12 @@ namespace Academy
                     .ForMember(dst => dst.TrainerName,src => src.MapFrom(e=>e.Trainer.Name))
                     .ForMember(dst => dst.CategoryName,src => src.MapFrom(e=>e.Category.Name))
                     .ReverseMap();
-               
+                    cfg.CreateMap<Trainee, TraineeModel>().ReverseMap();
+                    cfg.CreateMap<Trainee_Course, TraineeCourseModel>()
+                   .ForMember(dst => dst.CourseID, src => src.MapFrom(e => e.Course_ID))
+                   .ForMember(dst => dst.Registration_Date, src => src.MapFrom(e => e.Registration_Date))
+                   .ForMember(dst => dst.Trainee, src => src.MapFrom(e => e.Trainee))
+                    .ReverseMap();
 
                 });
             Mapper =config.CreateMapper();  
