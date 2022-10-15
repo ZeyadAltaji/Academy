@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
+
 [assembly: OwinStartup(typeof(Academy.App_Start.Owin.Startup))]
 
 namespace Academy.App_Start.Owin
