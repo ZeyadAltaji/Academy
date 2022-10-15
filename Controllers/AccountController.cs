@@ -12,23 +12,26 @@ namespace Academy.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<MyIdentityUser> userManager;
+        private readonly UserManager<MyIdentityUser> usermanager;
         public AccountController()
         {
             var DB = new AcademyIdentityDBContext();
             var userStore = new UserStore<MyIdentityUser>(DB);
-            userManager = new UserManager<MyIdentityUser>(userStore);
-
+            usermanager = new UserManager<MyIdentityUser>(userStore);
         }
+
         // GET: Account
         public async Task<ActionResult> Login()
         {
-            var user = await userManager.CreateAsync(new MyIdentityUser
-            {
-                Email = "Test@test.com",
-                UserName = "Test"
-            }, "123456");
-            ViewBag.User = user.Succeeded;
+            //var user = await usermanager.CreateAsync(new MyIdentityUser
+            //{
+            //    Email = "test@test.com",
+            //    UserName = "Zeyad"
+            //}, "opqw2011");
+            //ViewBag.User = user.Succeeded;
+            usermanager.AddToRole("ba91edd9-e98e-4efb-9dfc-173422fcab98", "Admin");
+            var LoginAcc = usermanager.Find("Zeyad", "opqw2011");
+            ViewBag.User = LoginAcc.Email;
             return View();
         }
     }
