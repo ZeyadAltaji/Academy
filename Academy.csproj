@@ -177,6 +177,7 @@
     <Compile Include="Models\TraineeCourseModel.cs" />
     <Compile Include="Models\TraineeModel.cs" />
     <Compile Include="Models\TrainerModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AdminService.cs" />
     <Compile Include="Service\CategoryService.cs" />
@@ -185,8 +186,11 @@
     <Compile Include="Service\TrainerService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\user-style.css" />
+    <Content Include="assets\css\heroic-features.css" />
     <Content Include="assets\css\sb-admin-2.css" />
     <Content Include="assets\css\sb-admin-2.min.css" />
+    <Content Include="assets\css\stylesUser.css" />
     <Content Include="assets\css\styles.css" />
     <Content Include="assets\img\undraw_posting_photo.svg" />
     <Content Include="assets\img\undraw_profile.svg" />
@@ -200,6 +204,7 @@
     <Content Include="assets\js\demo\datatables-demo.js" />
     <Content Include="assets\js\sb-admin-2.js" />
     <Content Include="assets\js\sb-admin-2.min.js" />
+    <Content Include="assets\js\JSUser.js" />
     <Content Include="assets\js\scripts.js" />
     <Content Include="assets\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="assets\vendor\bootstrap\js\bootstrap.bundle.min.js" />
@@ -2112,6 +2117,8 @@
     <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

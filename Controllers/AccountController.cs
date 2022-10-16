@@ -21,6 +21,11 @@ namespace Academy.Controllers
         }
 
         // GET: Account
+
+        public ActionResult index()
+        {
+            return View();
+        }
         public async Task<ActionResult> Login()
         {
             //var user = await usermanager.CreateAsync(new MyIdentityUser
@@ -32,6 +37,10 @@ namespace Academy.Controllers
             usermanager.AddToRole("ba91edd9-e98e-4efb-9dfc-173422fcab98", "Admin");
             var LoginAcc = usermanager.Find("Zeyad", "opqw2011");
             ViewBag.User = LoginAcc.Email;
+            return View();
+        }
+        public ActionResult Register()
+        {
             return View();
         }
     }
