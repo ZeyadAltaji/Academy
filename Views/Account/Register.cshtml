@@ -6,12 +6,12 @@
 <div class="row">
     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
 
-        @*@if (Model != null && !string.IsNullOrEmpty(Model.Message))
+        @if (Model != null && !string.IsNullOrEmpty(Model.Message))
             {
                 <div class="alert alert-danger" style="margin-top: 5rem">
                     @Model.Message
                 </div>
-            }*@
+            }
 
         <div class="card card-signin my-5">
             <div class="card-body">
@@ -42,7 +42,7 @@
                     <div class="form-label-group">
                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Password" })
                         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "text-info" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                     </div>
                     <hr class="my-4">
 

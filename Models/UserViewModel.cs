@@ -18,6 +18,7 @@ namespace Academy.Models
 
         [Compare("Password", ErrorMessage = "Confirm Password doesn't match Password")]
         public string ConfirmPassword { get; set; }
+        public string Message { get; set; }
     }
     public class LoginViewModel
     {

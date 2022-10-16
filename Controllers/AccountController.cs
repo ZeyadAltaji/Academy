@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace Academy.Controllers
 {
@@ -60,13 +61,14 @@ namespace Academy.Controllers
                 {
                     var userid = IdentityUser.Id;
                     usermanager.AddToRole(userid, "Admin");
-                    return RedirectToAction("Index", "Dashboard", new { Areas = "Admin" });
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 }
-                     
-
+              
+                var message = createdUser.Errors.FirstOrDefault();
+                resUser.Message = message;
             }
 
-            return View();
+            return View(resUser);
         }
     }
 }
