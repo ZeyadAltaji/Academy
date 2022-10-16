@@ -16,19 +16,19 @@
         <div class="card card-signin my-5">
             <div class="card-body">
                 <h5 class="card-title text-center">Res</h5>
-                @using (Html.BeginForm("login", "account", FormMethod.Post, new { @class = "form-signin" }))
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-signin" }))
                 {
                     @Html.AntiForgeryToken()
                     @*@Html.HiddenFor(m => m.ReturnUrl)*@
 
                     <div class="form-label-group">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "User Name" })
-                        @Html.LabelFor(m => m.UserName, new { @class = "text-info" })
-                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "User Name" })
+                        @Html.LabelFor(m => m.Name, new { @class = "text-info" })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-label-group">
-                        @Html.PasswordFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
                         @Html.LabelFor(m => m.Email, new { @class = "text-info" })
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     </div>
@@ -40,9 +40,9 @@
                     </div>
 
                     <div class="form-label-group">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Password" })
                         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "text-info" })
-                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     </div>
                     <hr class="my-4">
 

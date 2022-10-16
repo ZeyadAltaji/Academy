@@ -1,4 +1,5 @@
-﻿using Data_Access;
+﻿using Academy.Models;
+using Data_Access;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -41,6 +42,30 @@ namespace Academy.Controllers
         }
         public ActionResult Register()
         {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(RegisterViewModel resUser)
+        {
+            if(ModelState.IsValid)
+            {
+                var IdentityUser = new MyIdentityUser
+                {
+                    Email = resUser.Email,
+                    UserName = resUser.Email
+                };
+                var createdUser = await usermanager.CreateAsync(IdentityUser,resUser.Password);
+                if (createdUser.Succeeded)
+                {
+                    var userid = IdentityUser.Id;
+                    usermanager.AddToRole(userid, "Admin");
+                    return RedirectToAction("Index", "Dashboard", new { Areas = "Admin" });
+                }
+                     
+
+            }
+
             return View();
         }
     }

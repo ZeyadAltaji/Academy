@@ -9,14 +9,14 @@ namespace Academy.Models
     public class RegisterViewModel
     {
         [Required]
-        public string UserName { get; set; }
+        public string Name { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-        [Compare("passowrd",ErrorMessage ="Confirm password doesn't match Password !! ")]
 
+        [Compare("Password", ErrorMessage = "Confirm Password doesn't match Password")]
         public string ConfirmPassword { get; set; }
     }
     public class LoginViewModel
