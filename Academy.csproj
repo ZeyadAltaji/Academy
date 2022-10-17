@@ -170,6 +170,7 @@
     <Compile Include="Interfaces\IAdminService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="Interfaces\ICourseService.cs" />
+    <Compile Include="Interfaces\ITraineeService .cs" />
     <Compile Include="Interfaces\ITraineeCourseService.cs" />
     <Compile Include="Interfaces\ITrainerService.cs" />
     <Compile Include="Models\CategoryModel.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Service\AdminService.cs" />
     <Compile Include="Service\CategoryService.cs" />
     <Compile Include="Service\CourseService.cs" />
+    <Compile Include="Service\TraineeService.cs" />
     <Compile Include="Service\TraineeCourseService.cs" />
     <Compile Include="Service\TrainerService.cs" />
   </ItemGroup>

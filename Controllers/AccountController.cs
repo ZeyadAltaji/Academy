@@ -1,4 +1,5 @@
 ﻿using Academy.Models;
+using Academy.Service;
 using Data_Access;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -15,11 +16,13 @@ namespace Academy.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<MyIdentityUser> usermanager;
+        private readonly TraineeService Traineeservice;
         public AccountController()
         {
             var DB = new AcademyIdentityDBContext();
             var userStore = new UserStore<MyIdentityUser>(DB);
             usermanager = new UserManager<MyIdentityUser>(userStore);
+            Traineeservice = new TraineeService();
         }
 
         // GET: Account
@@ -41,6 +44,7 @@ namespace Academy.Controllers
             ViewBag.User = LoginAcc.Email;
             return View();
         }
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
@@ -57,11 +61,31 @@ namespace Academy.Controllers
                     UserName = resUser.Email
                 };
                 var createdUser = await usermanager.CreateAsync(IdentityUser,resUser.Password);
+                //user created 
                 if (createdUser.Succeeded)
                 {
                     var userid = IdentityUser.Id;
-                    usermanager.AddToRole(userid, "Admin");
-                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    usermanager.AddToRole(userid, "Trainee");
+                    // Role created
+                    if (createdUser.Succeeded)
+                    {
+                        // Save to Trainee table
+                        var saveingres = Traineeservice.Create(new Trainee
+                        {
+                            Email = resUser.Email,
+                            Name = resUser.Name,
+                            IS_Active = true,
+                            Creation_Date = DateTime.Now
+
+                        });
+                        if (saveingres == null)
+                        {
+                            resUser.Message = "An Error while Creatung Your Account !!";
+                            return View(resUser);
+                        }
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+
+                    }
                 }
               
                 var message = createdUser.Errors.FirstOrDefault();

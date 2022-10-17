@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace Academy.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class CourseController : Controller
     {
         private readonly IMapper Mapper;

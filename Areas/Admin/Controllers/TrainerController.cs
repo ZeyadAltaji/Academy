@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Academy.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TrainerController : Controller
     {
         private readonly IMapper Mapper;

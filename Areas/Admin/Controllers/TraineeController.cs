@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Academy.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TraineeController : Controller
     {
         private readonly TraineeCourseService traineeCourseService;

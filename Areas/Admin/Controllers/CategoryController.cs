@@ -10,6 +10,7 @@ using AutoMapper;
 
 namespace Academy.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
        
