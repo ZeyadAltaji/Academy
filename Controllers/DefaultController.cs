@@ -24,7 +24,10 @@ namespace Academy.Controllers
         public ActionResult Index()
         {
             var courses = courseService.ReadAll();
-            return View(Mapper.Map<List<Course>,List<CourseModel>>(courses));
+            var DisplayListCourse = Mapper.Map<List<Course>, List<CourseModel>>(courses);
+            return View(DisplayListCourse);
         }
+  
+
     }
 }

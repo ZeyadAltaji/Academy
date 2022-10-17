@@ -2124,6 +2124,10 @@
     <Content Include="Views\Shared\_UserLayout.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\Course\Info.cshtml" />
+    <Content Include="Views\Shared\_CoursesListView.cshtml" />
+    <Content Include="Views\Course\Subscribe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2131,7 +2135,6 @@
     <Folder Include="Areas\Instructor\Controllers\" />
     <Folder Include="Areas\Instructor\Data\" />
     <Folder Include="Areas\Instructor\Views\Shared\" />
-    <Folder Include="Views\Course\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
