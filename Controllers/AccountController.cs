@@ -134,5 +134,16 @@ namespace Academy.Controllers
             authmanager.SignIn(Identity);
 
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Logout()
+        {
+            var owinContext = Request.GetOwinContext();
+            var authManager = owinContext.Authentication;
+            authManager.SignOut("ApplicationCookie");
+            Session.Abandon();
+            return RedirectToAction("Index", "Default");
+
+        }
     }
 }
