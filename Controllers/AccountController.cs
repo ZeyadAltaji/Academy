@@ -31,7 +31,8 @@ namespace Academy.Controllers
         {
             return View();
         }
-        public async Task<ActionResult> Login()
+        [AllowAnonymous]
+        public ActionResult Login(string ReturnUrl = "")
         {
             //var user = await usermanager.CreateAsync(new MyIdentityUser
             //{
@@ -39,9 +40,19 @@ namespace Academy.Controllers
             //    UserName = "Zeyad"
             //}, "opqw2011");
             //ViewBag.User = user.Succeeded;
-            usermanager.AddToRole("ba91edd9-e98e-4efb-9dfc-173422fcab98", "Admin");
-            var LoginAcc = usermanager.Find("Zeyad", "opqw2011");
-            ViewBag.User = LoginAcc.Email;
+            //usermanager.AddToRole("ba91edd9-e98e-4efb-9dfc-173422fcab98", "Admin");
+            //var LoginAcc = usermanager.Find("Zeyad", "opqw2011");
+            //ViewBag.User = LoginAcc.Email;
+            return View(new LoginViewModel
+            {
+                ReturnUrl = ReturnUrl
+            });
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(LoginViewModel logindata)
+        {
+             
             return View();
         }
         [AllowAnonymous]
