@@ -157,6 +157,7 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CourseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CourseUnitsController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\TraineeController.cs" />
     <Compile Include="Areas\Admin\Controllers\TrainerController.cs" />
@@ -171,11 +172,13 @@
     <Compile Include="Interfaces\IAdminService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="Interfaces\ICourseService.cs" />
+    <Compile Include="Interfaces\ICourseUnitService.cs" />
     <Compile Include="Interfaces\ITraineeService .cs" />
     <Compile Include="Interfaces\ITraineeCourseService.cs" />
     <Compile Include="Interfaces\ITrainerService.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\CourseModel.cs" />
+    <Compile Include="Models\CourseUnitModel.cs" />
     <Compile Include="Models\TraineeCourseModel.cs" />
     <Compile Include="Models\TraineeModel.cs" />
     <Compile Include="Models\TrainerModel.cs" />
@@ -184,6 +187,7 @@
     <Compile Include="Service\AdminService.cs" />
     <Compile Include="Service\CategoryService.cs" />
     <Compile Include="Service\CourseService.cs" />
+    <Compile Include="Service\CourseUnitService.cs" />
     <Compile Include="Service\TraineeService.cs" />
     <Compile Include="Service\TraineeCourseService.cs" />
     <Compile Include="Service\TrainerService.cs" />
@@ -2095,6 +2099,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\CourseUnits\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
