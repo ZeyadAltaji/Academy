@@ -13,7 +13,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-       
+
         <th></th>
     </tr>
 
@@ -32,3 +32,52 @@
     }
 
 </table>
+    <script src="~/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.btnAddUnit').on('click', function () {
+
+                bootbox.prompt("Enter unit name: ", function (result) {
+
+                    if (result === null)
+                        return;
+
+                    var unitName = result;
+                    var courseId = $('#hdnCourseId').val();
+
+                    var unit = {
+                        Name: unitName,
+                        Course_Id: courseId
+                    };
+
+                    console.log(unit);
+                    $.ajax({
+                        url: "/Admin/CourseUnits/Create",
+                        method: "post",
+                        data: JSON.stringify(unit),
+                        contentType: "application/json",
+                        success: function (result) {
+                            debugger;
+                            var saved = result.saved;
+
+                            if (saved === true) {
+                                window.location.href = "/Admin/CourseUnits?courseId=" + courseId;
+                            } else {
+                                if (result.message !== null && result.message === "exists")
+                                    bootbox.alert("Unit name is already exists!");
+                                else
+                                    bootbox.alert("An error occurred while adding new unit!");
+                            }
+                        },
+                        error: function (result) {
+                            console.log(result);
+                            bootbox.alert(result.responseText);
+                        }
+                    })
+                });
+            });
+        })
+    </script>
