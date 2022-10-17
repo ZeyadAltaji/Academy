@@ -30,7 +30,18 @@ namespace Academy.Models
 
         public SelectList Trainers { get; set; }
         public SelectList Categories { get; set; }
-        public string ImageID { get; set; }
+        private string _ImageID;
+        public string ImageID 
+        {
+            get 
+            {
+                return _ImageID;
+            }
+            set 
+            {
+                _ImageID = string.IsNullOrWhiteSpace(value)? "empty.jpg" : value;
+            } 
+        }
         
         public HttpPostedFileBase ImageFile{ get; set; }
     }
