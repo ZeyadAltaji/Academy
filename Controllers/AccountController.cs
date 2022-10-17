@@ -52,8 +52,29 @@ namespace Academy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel logindata)
         {
-             
-            return View();
+            if (ModelState.IsValid)
+            { 
+                  var Exitlogin =await usermanager.FindAsync(logindata.Email, logindata.Password);
+                 if(Exitlogin != null)
+                 {
+                     await SignIn(Exitlogin);
+                    // Business //
+                    if (!string.IsNullOrEmpty(logindata.ReturnUrl))
+                    {
+                        return Redirect(logindata.ReturnUrl);
+                    }
+                      var userRole=  usermanager.GetRoles(Exitlogin.Id);
+                      var role = userRole.FirstOrDefault();
+                    if(role == "Admin")
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    }
+                
+                    return RedirectToAction("Index", "Dashboard");
+                 }
+            logindata.Message = "Email or Password is Incorrect !";
+            }
+            return View(logindata);
         }
         [AllowAnonymous]
         public ActionResult Register()
@@ -104,6 +125,14 @@ namespace Academy.Controllers
             }
 
             return View(resUser);
+        }
+        private async Task SignIn(MyIdentityUser myIdentityUser)
+        {
+            var Identity =await usermanager.CreateIdentityAsync(myIdentityUser,DefaultAuthenticationTypes.ApplicationCookie);
+            var owinContext = Request.GetOwinContext();
+            var authmanager = owinContext.Authentication;
+            authmanager.SignIn(Identity);
+
         }
     }
 }

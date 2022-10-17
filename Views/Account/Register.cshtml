@@ -19,7 +19,7 @@
                 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-signin" }))
                 {
                     @Html.AntiForgeryToken()
-                    @*@Html.HiddenFor(m => m.ReturnUrl)*@
+                    @Html.HiddenFor(m => m.ReturnUrl)
 
                     <div class="form-label-group">
                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "User Name" })
